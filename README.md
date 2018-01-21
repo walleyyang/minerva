@@ -1,1 +1,1 @@
-# minerva
+Minerva extracts named entities from unstructured news articles and tweets using Natural Language Processing, which enables geospatial data visualization and named entity correlation between news articles and tweets.
