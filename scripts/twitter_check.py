@@ -1,3 +1,12 @@
+#!/usr/bin/env python
+"""
+This file does the following:
+1. Retrieves PERSON and ORG entities from MongoDB.
+2. Filters and removes duplicates from the PERSON and ORG lists.
+3. Searches Twitter for each word in a list.
+4. Adds the Twitter data into MongoDB.
+"""
+
 import re
 import twitter
 import json

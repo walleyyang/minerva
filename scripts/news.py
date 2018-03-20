@@ -1,3 +1,13 @@
+#!/usr/bin/env python
+"""
+This file does the following:
+1. Retrieves the current trending news in the United States with the NewsAPI.
+2. Scrapes the article webpage with Beautiful Soup.
+3. Uses the Natural Language Processing library Spacy to extract entities.
+4. Uses GeoCoder to retrieve longitude and latitude coordinates from GeoNames.
+5. Adds the data to MongoDB.
+"""
+
 import json
 import re
 
