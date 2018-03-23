@@ -21,12 +21,14 @@ import spacy
 import config
 
 def get_request(url):
+    print('Getting request...')
     headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'}
     request = requests.get(url, headers=headers)
-    
+
     return request
     
 def get_news():
+    print('Getting news...')
     # Get top headines for the US
     url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=" + config.KEYS['NEWS_API']
     
@@ -38,6 +40,7 @@ def get_news():
         create_json(articles)
 
 def article_exist(url_check, collection_name_check):
+    print('Checking if article already exists...')
     client = MongoClient()
     db = client['news']
     collection = db[collection_name_check]
@@ -49,6 +52,7 @@ def article_exist(url_check, collection_name_check):
     return False
         
 def get_article(url):
+    print('Getting article...')
     request = get_request(url)
     article = None
 
@@ -80,6 +84,7 @@ def get_article(url):
     return article
 
 def create_json(articles):
+    print('Creating json...')
     nlp = spacy.load('en')
     regex = re.compile('[^a-zA-Z]')
 
@@ -122,6 +127,7 @@ def create_json(articles):
             add_to_db(collection_name, json.loads(dictionary_dump))
 
 def add_to_db(collection_name, data):
+    print('Adding to database...')
     client = MongoClient()
     db = client['news']
     collection = db[collection_name]

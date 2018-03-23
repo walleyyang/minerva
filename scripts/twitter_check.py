@@ -15,6 +15,7 @@ import datetime
 from pymongo import MongoClient
 
 def get_tweets(primary_id, news_list):
+    print('Getting tweets...')
     auth = twitter.oauth.OAuth(config.KEYS['TWITTER_OAUTH_TOKEN'], config.KEYS['TWITTER_OAUTH_TOKEN_SECRET'], 
                                config.KEYS['TWITTER_CONSUMER_KEY'], config.KEYS['TWITTER_CONSUMER_SECRET'])
 
@@ -29,6 +30,7 @@ def get_tweets(primary_id, news_list):
         add_to_db(collection_name, tweet)
 
 def get_news():
+    print('Getting news from database...')
     client = MongoClient()
     db = client['news']
 
@@ -63,6 +65,7 @@ def filter_list(dirty_list):
     return list(set(filtered_list))
 
 def add_to_db(collection_name, data):
+    print('Adding tweets to database...')
     try:  
         client = MongoClient()
         db = client['twitter']
