@@ -20,11 +20,13 @@ import requests
 import spacy
 import config
 
+db_name = 'minerva'
+collection_name = 'news'
+
 def get_request(url):
     print('Getting request...')
     headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'}
-    request = requests.get(url, headers=headers)
-
+    request = requests.get(url, headers=headers, timeout=10)
     return request
     
 def get_news():
@@ -39,11 +41,11 @@ def get_news():
         articles = json.loads(data)
         create_json(articles)
 
-def article_exist(url_check, collection_name_check):
+def article_exist(url_check):
     print('Checking if article already exists...')
     client = MongoClient()
-    db = client['news']
-    collection = db[collection_name_check]
+    db = client[db_name]
+    collection = db[collection_name]
     url_count = collection.find({'url': url_check}).count()
 
     if url_count > 0:
@@ -89,9 +91,7 @@ def create_json(articles):
     regex = re.compile('[^a-zA-Z]')
 
     for article in articles['articles']:
-        collection_name = regex.sub('', article['source']['name'])
-
-        if article_exist(article['url'], collection_name) is True:
+        if article_exist(article['url']) is True:
             continue
 
         # The GPE and LOC keys are used to retrieve latitude and longitudes from GeoNames.
@@ -124,12 +124,12 @@ def create_json(articles):
                     dictionary[ent.label_].append(ent.text)
        
             dictionary_dump = json.dumps(dictionary)
-            add_to_db(collection_name, json.loads(dictionary_dump))
+            add_to_db(json.loads(dictionary_dump))
 
-def add_to_db(collection_name, data):
+def add_to_db(data):
     print('Adding to database...')
     client = MongoClient()
-    db = client['news']
+    db = client[db_name]
     collection = db[collection_name]
     collection.insert_one(data)
       

@@ -14,6 +14,9 @@ import config
 import datetime
 from pymongo import MongoClient
 
+db_name = 'minerva'
+collection_name = 'twitter'
+
 def get_tweets(primary_id, news_list):
     print('Getting tweets...')
     auth = twitter.oauth.OAuth(config.KEYS['TWITTER_OAUTH_TOKEN'], config.KEYS['TWITTER_OAUTH_TOKEN_SECRET'], 
@@ -25,34 +28,31 @@ def get_tweets(primary_id, news_list):
     
     for word in news_list:
         count += 1
-        collection_name = str(primary_id) + '_' + str(count)
         tweet = twitter_api.search.tweets(q = word, count = 10)
-        add_to_db(collection_name, tweet)
+        add_to_db(tweet)
 
 def get_news():
     print('Getting news from database...')
     client = MongoClient()
-    db = client['news']
+    db = client[db_name]
+    collection = db['news']
+    cursor = collection.find()
+    primary_id = None
 
-    for collection_name in db.collection_names():
-        collection = db[collection_name]
-        cursor = collection.find()
-        primary_id = None
-        
-        # Only Person and Org are considered for this project
-        for doc in cursor:
-            primary_id = doc['_id']
-            lists = []
+    # Only Person and Org are considered for this project
+    for doc in cursor:
+        primary_id = doc['_id']
+        lists = []
 
-            if doc['PERSON']:
-                lists += filter_list(doc['PERSON'])
+        if doc['PERSON']:
+            lists += filter_list(doc['PERSON'])
+          
+        if doc['ORG']:
+            lists += filter_list(doc['ORG'])
+
+        if lists:
+            get_tweets(primary_id, lists)
             
-            if doc['ORG']:
-                lists += filter_list(doc['ORG'])
-        
-            if lists:
-                get_tweets(primary_id, lists)
-    
 def filter_list(dirty_list):
     regex = re.compile('[^a-zA-Z]')
     filtered_list = []
@@ -64,11 +64,11 @@ def filter_list(dirty_list):
     
     return list(set(filtered_list))
 
-def add_to_db(collection_name, data):
+def add_to_db(data):
     print('Adding tweets to database...')
     try:  
         client = MongoClient()
-        db = client['twitter']
+        db = client[db_name]
         collection = db[collection_name]
         collection.insert_one(data)
     except e:
