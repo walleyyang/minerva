@@ -1,0 +1,29 @@
+<!DOCTYPE>
+<html lang="en">
+<head>
+    <title>Minerva</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="/assets/css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/leaflet/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/leaflet-markercluster/MarkerCluster.Default.css" />
+</head>
+<body ng-app="minerva" ng-cloak>
+    <div ng-controller="news">
+        <div id="map"></div>
+        <div class="entity-count-container">
+            <span class="entity-count">People: {{people}}</span>
+            <span class="entity-count">Organizations: {{organizations}}</span>
+        </div>
+        <div style="height:300px; width:1000px;" ag-grid="gridOptions" class="ag-theme-balham"></div>        
+    </div>
+    <script src="/assets/angular/angular.min.js"></script>
+    <script src="/assets/jquery/jquery.min.js"></script>
+    <script src="/assets/popper/popper.min.js"></script>
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/ag-grid/ag-grid.min.js"></script>
+    <script src="/assets/leaflet/leaflet.js"></script>
+    <script src="/assets/leaflet-markercluster/leaflet.markercluster.js"></script>
+    <script src="/assets/js/minerva.controller.js"></script>
+</body>
+</html>

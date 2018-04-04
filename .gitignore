@@ -2,3 +2,5 @@
 /.vagrant
 Vagrantfile
 *.log
+node_modules
+scripts/__pycache__
