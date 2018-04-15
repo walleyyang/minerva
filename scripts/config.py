@@ -1,5 +1,7 @@
 """
 This is the main config file.
+
+@author: Walley Yang
 """
 
 KEYS = {

@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 """
+@author: Walley Yang
+
 This file does the following:
 1. Retrieves the current trending news in the United States with the NewsAPI.
 2. Scrapes the article webpage with Beautiful Soup.

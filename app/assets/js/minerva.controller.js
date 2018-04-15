@@ -1,3 +1,6 @@
+/*
+@author: Walley Yang
+*/
 agGrid.initialiseAgGridWithAngular1(angular)
 
 let minerva = angular.module('minerva', ['agGrid'])

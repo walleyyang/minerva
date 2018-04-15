@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# @author: Walley Yang
 
 # Start MongoDB
 echo "Starting MongoDB..."

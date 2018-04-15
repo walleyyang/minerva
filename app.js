@@ -1,3 +1,7 @@
+/*
+@author: Walley Yang
+*/
+
 require('./api/data/dbConnection.js').open()
 let express = require('express')
 let app = express()

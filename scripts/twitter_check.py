@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 """
+@author: Walley Yang
+
 This file does the following:
 1. Retrieves PERSON and ORG entities from MongoDB.
 2. Filters and removes duplicates from the PERSON and ORG lists.
