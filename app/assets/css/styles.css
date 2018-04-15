@@ -14,3 +14,54 @@
 .entity-count {
     padding: 0 10px;
 }
+
+#twitter {
+    background: gray;
+}
+
+#container {
+    width:1300px;
+    margin: 0 auto;
+}
+
+.left-column {
+    width: 1000px;
+    float:left;
+}
+
+.right-column {
+    width: 300px;
+    float:right;
+}
+
+#twitter {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 794px;
+}
+
+#twitter_header {
+    height: 50px;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+    background:#0084b4;
+}
+
+.twitter_screen_name {
+    font-weight: bold;
+}
+
+.twitter_date {
+    font-size: 12px;
+}
+
+.twitter_text {
+    font-size: 14px;
+}
+
+.tweet {
+    padding: 20px 5px;
+    background: lightgray;
+}

@@ -29,6 +29,7 @@ def get_tweets(primary_id, news_list):
     for word in news_list:
         count += 1
         tweet = twitter_api.search.tweets(q = word, count = 10)
+        tweet['news'] = {'news_id': primary_id, 'query': word}
         add_to_db(tweet)
 
 def get_news():
